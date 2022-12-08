@@ -13,7 +13,6 @@ class SubscriptionAdapter (
     inner class  SubscriptionViewHolder(val binding: ItemSubscriptionBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubscriptionViewHolder {
-
         return SubscriptionViewHolder(ItemSubscriptionBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
@@ -25,9 +24,21 @@ class SubscriptionAdapter (
             tvSubPrice.text = subscriptions[position].price
 //        Setup subscription image
         }
+
+        holder.binding.root.setOnClickListener {
+            onItemClickListener?.let {
+                it(subscriptions[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return subscriptions.size
+    }
+
+    private var onItemClickListener : ((Subscription) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Subscription) -> Unit) {
+        onItemClickListener = listener
     }
 }

@@ -17,12 +17,17 @@ class SubscriptionsFragment : Fragment() {
     private var _binding: FragmentSubscriptionsBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var subscriptionAdapter: SubscriptionAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentSubscriptionsBinding.inflate(inflater, container, false)
+        setupRecyclerView()
+
+
         return binding.root
 
     }
@@ -30,7 +35,28 @@ class SubscriptionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var subscriptionList = mutableListOf(
+        binding.fab.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+
+        subscriptionAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("subscription", it)
+            }
+            findNavController().navigate(
+                R.id.action_FirstFragment_to_showDetailsFragment,
+                bundle
+            )
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setupRecyclerView() = binding.rvSubscriptions.apply {
+        val subscriptionList = mutableListOf(
             Subscription("Netflix", "May 11", "$17"),
             Subscription("Youtube Premium", "May 18", "$5"),
             Subscription("HBO GO", "May 30", "$12"),
@@ -40,18 +66,8 @@ class SubscriptionsFragment : Fragment() {
             Subscription("Tik Tok Premium", "July 7", "$10"),
             Subscription("Snapchat", "September 17", "$6")
         )
-        val addSubFragment = AddSubFragment()
-        val adapter = SubscriptionAdapter(subscriptionList)
-        binding.rvSubscriptions.adapter = adapter
-        binding.rvSubscriptions.layoutManager = LinearLayoutManager(requireContext())
-
-        binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        subscriptionAdapter = SubscriptionAdapter(subscriptionList)
+        adapter = subscriptionAdapter
+        layoutManager = LinearLayoutManager(requireContext())
     }
 }
