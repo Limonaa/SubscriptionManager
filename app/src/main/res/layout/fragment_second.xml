@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.AddSubFragment">
-    android:paddingTop="16dp"
-    android:paddingLeft="10dp">
+
 
 
 
@@ -21,43 +20,44 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp">
 
-                <Button
+                <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp" />
-
-                <Button
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp" />
-
-                <Button
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp" />
-
-                <Button
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp" />
-
-
-                <Button
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp" />
-
-                <Button
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp" />
+                    android:layout_height="wrap_content"/> <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/> <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+
 
 
             </LinearLayout>
@@ -71,6 +71,7 @@
         android:layout_height="wrap_content"
         android:hint="name"
         android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:layout_marginTop="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +93,9 @@
         android:hint="price"
         android:layout_marginTop="20dp"
         android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:suffixText="PLN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subName">
@@ -107,7 +110,7 @@
         android:id="@+id/datePickerBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_margin="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subPrice" />
