@@ -7,7 +7,7 @@ import com.example.subscriptionmanager.data.Subscription
 import com.example.subscriptionmanager.databinding.ItemSubscriptionBinding
 
 class SubscriptionAdapter (
-    private var subscriptions: List<Subscription>
+    var subscriptions: List<Subscription>
         ) : RecyclerView.Adapter<SubscriptionAdapter.SubscriptionViewHolder>(){
 
     inner class  SubscriptionViewHolder(val binding: ItemSubscriptionBinding) : RecyclerView.ViewHolder(binding.root)
