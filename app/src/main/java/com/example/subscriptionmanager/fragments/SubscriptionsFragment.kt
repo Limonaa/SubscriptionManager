@@ -1,5 +1,6 @@
 package com.example.subscriptionmanager.fragments
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.subscriptionmanager.R
 import com.example.subscriptionmanager.adapters.SubscriptionAdapter
 import com.example.subscriptionmanager.data.Subscription
+import com.example.subscriptionmanager.databinding.FragmentSecondBinding
 import com.example.subscriptionmanager.databinding.FragmentSubscriptionsBinding
 
 class SubscriptionsFragment : Fragment() {
@@ -44,9 +46,13 @@ class SubscriptionsFragment : Fragment() {
         val adapter = SubscriptionAdapter(subscriptionList)
         binding.rvSubscriptions.adapter = adapter
         binding.rvSubscriptions.layoutManager = LinearLayoutManager(requireContext())
+        val addingFullDialog = Dialog(requireContext(), android.R.style.ThemeOverlay)
+        val addingFullDialogBinding = FragmentSecondBinding.inflate(LayoutInflater.from(requireContext()))
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            addingFullDialog.show()
+            addingFullDialog.setContentView(addingFullDialogBinding.root)
         }
     }
 
