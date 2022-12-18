@@ -16,6 +16,7 @@ class SubscriptionsFragment : Fragment() {
 
     private var _binding: FragmentSubscriptionsBinding? = null
     private val binding get() = _binding!!
+    lateinit var subscriptionsAdapter: SubscriptionAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,12 +24,37 @@ class SubscriptionsFragment : Fragment() {
     ): View? {
 
         _binding = FragmentSubscriptionsBinding.inflate(inflater, container, false)
+
+        setupRecyclerView()
+
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.fab.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+
+        subscriptionsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("subscription", it)
+            }
+            findNavController().navigate(
+                R.id.action_FirstFragment_to_showDetailsFragment,
+                bundle
+            )
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun setupRecyclerView() = binding.rvSubscriptions.apply {
 
         var subscriptionList = mutableListOf(
             Subscription("Netflix", "May 11", "$17"),
@@ -40,18 +66,8 @@ class SubscriptionsFragment : Fragment() {
             Subscription("Tik Tok Premium", "July 7", "$10"),
             Subscription("Snapchat", "September 17", "$6")
         )
-        val addSubFragment = AddSubFragment()
-        val adapter = SubscriptionAdapter(subscriptionList)
-        binding.rvSubscriptions.adapter = adapter
-        binding.rvSubscriptions.layoutManager = LinearLayoutManager(requireContext())
-
-        binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        subscriptionsAdapter = SubscriptionAdapter(subscriptionList)
+        adapter = subscriptionsAdapter
+        layoutManager = LinearLayoutManager(requireContext())
     }
 }

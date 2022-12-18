@@ -5,4 +5,4 @@ data class Person(
     var payTime: String,
     var price: String,
     var avatar: Int?,
-)
+) : java.io.Serializable

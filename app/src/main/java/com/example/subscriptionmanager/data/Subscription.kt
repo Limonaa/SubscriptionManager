@@ -5,4 +5,4 @@ data class Subscription(
     var paymentDate: String,
     var price: String,
     //add image
-)
+) : java.io.Serializable
