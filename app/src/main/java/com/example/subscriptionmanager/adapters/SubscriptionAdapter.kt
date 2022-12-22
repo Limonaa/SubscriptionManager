@@ -25,9 +25,20 @@ class SubscriptionAdapter (
             tvSubPrice.text = subscriptions[position].price
 //        Setup subscription image
         }
+        holder.binding.root.setOnClickListener {
+            onItemClickListener?.let {
+                it(subscriptions[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return subscriptions.size
+    }
+
+    private var onItemClickListener: ((Subscription) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Subscription) -> Unit) {
+        onItemClickListener = listener
     }
 }
