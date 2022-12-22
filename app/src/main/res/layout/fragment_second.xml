@@ -6,10 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AddSubFragment">
 
-
-
-
-
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
