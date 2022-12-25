@@ -43,13 +43,9 @@ class SubscriptionsFragment : Fragment() {
         }
 
         subscriptionsAdapter.setOnItemClickListener {
-            val bundle = Bundle().apply {
-                putSerializable("subscription", it)
-            }
-            findNavController().navigate(
-                R.id.action_FirstFragment_to_showDetailsFragment,
-                bundle
-            )
+            findNavController().navigate(R.id.action_FirstFragment_to_showDetailsFragment)
+
+            viewModel.setSelectedSubscription(it)
         }
     }
 
