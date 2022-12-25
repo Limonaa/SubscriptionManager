@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.subscriptionmanager.R
 import com.example.subscriptionmanager.data.Subscription
 import com.example.subscriptionmanager.databinding.FragmentSecondBinding
@@ -59,6 +60,7 @@ class AddSubFragment : Fragment() {
                 binding.tiPrice.text.toString(),
                 R.drawable.netflix_icon_161073
             ))
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
     }
 

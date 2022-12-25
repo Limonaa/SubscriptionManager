@@ -14,6 +14,7 @@ import com.example.subscriptionmanager.adapters.SubscriptionAdapter
 import com.example.subscriptionmanager.data.Person
 import com.example.subscriptionmanager.databinding.FragmentShowDetailsBinding
 import com.example.subscriptionmanager.viewmodels.MainViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -30,6 +31,8 @@ class ShowDetailsFragment : Fragment() {
     ): View? {
 
         _binding = FragmentShowDetailsBinding.inflate(inflater, container, false)
+
+        setRecyclerView()
         return binding.root
 
     }
@@ -44,6 +47,19 @@ class ShowDetailsFragment : Fragment() {
                 binding.tvNextPayment.text = it?.paymentDate
             }
         }
+
+        binding.fabAddPerson.setOnClickListener {
+            viewModel.addPerson(
+                Person(
+                "Adam",
+                "Jutro",
+                "10",
+                null
+            )
+            )
+            setRecyclerView()
+        }
+
     }
 
     override fun onDestroyView() {
@@ -52,14 +68,12 @@ class ShowDetailsFragment : Fragment() {
     }
 
     private fun setRecyclerView() = binding.rvPeople.apply {
-
-        val peopleList = mutableListOf(
-            Person("Jacek Marko", "22 września", "22PLN", R.drawable.avatar1),
-            Person("Maja Kwiatczyńska", "17 grudnia", "7PLN", R.drawable.avatar2),
-            Person("Maciej Kuźdup", "28 lutego", "112PLN", R.drawable.avatar3)
-        )
-        personAdapter = PersonAdapter(peopleList)
-        adapter = personAdapter
-        layoutManager = LinearLayoutManager(requireContext())
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.peopleList.collect {
+                personAdapter = PersonAdapter(it)
+                adapter = personAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
     }
 }
