@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.example.subscriptionmanager.R
 import com.example.subscriptionmanager.data.Subscription
 import com.example.subscriptionmanager.databinding.FragmentSecondBinding
 import com.example.subscriptionmanager.viewmodels.MainViewModel
@@ -55,7 +56,8 @@ class AddSubFragment : Fragment() {
                 1,
                 binding.tiName.text.toString(),
                 SimpleDateFormat("dd/MMMM/yyyy").format(Date()),
-                binding.tiPrice.text.toString()
+                binding.tiPrice.text.toString(),
+                R.drawable.netflix_icon_161073
             ))
         }
     }

@@ -40,7 +40,7 @@ class ShowDetailsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectedSubscription.collect {
                 binding.tvSubName.text = it?.name
-                binding.tvSubPrice.text = "${it?.price}PLN"
+                binding.tvSubPrice.text = "Cena: ${it?.price}PLN"
                 binding.tvNextPayment.text = it?.paymentDate
             }
         }
