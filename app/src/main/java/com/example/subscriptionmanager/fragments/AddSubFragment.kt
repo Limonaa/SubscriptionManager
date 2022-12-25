@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.example.subscriptionmanager.R
+import androidx.fragment.app.activityViewModels
+import com.example.subscriptionmanager.data.Subscription
 import com.example.subscriptionmanager.databinding.FragmentSecondBinding
+import com.example.subscriptionmanager.viewmodels.MainViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddSubFragment : Fragment() {
 
@@ -18,6 +21,7 @@ class AddSubFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +49,17 @@ class AddSubFragment : Fragment() {
         binding.datePickerBtn.setOnClickListener(){
             showDatePicker()
         }
+
+        binding.btnSave.setOnClickListener {
+            viewModel.addSubscription(Subscription(
+                1,
+                binding.tiName.text.toString(),
+                SimpleDateFormat("dd/MMMM/yyyy").format(Date()),
+                binding.tiPrice.text.toString()
+            ))
+        }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

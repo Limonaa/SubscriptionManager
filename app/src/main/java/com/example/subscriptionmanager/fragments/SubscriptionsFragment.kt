@@ -5,18 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.subscriptionmanager.R
 import com.example.subscriptionmanager.adapters.SubscriptionAdapter
-import com.example.subscriptionmanager.data.Subscription
 import com.example.subscriptionmanager.databinding.FragmentSubscriptionsBinding
+import com.example.subscriptionmanager.viewmodels.MainViewModel
+import kotlinx.coroutines.launch
 
 class SubscriptionsFragment : Fragment() {
 
     private var _binding: FragmentSubscriptionsBinding? = null
     private val binding get() = _binding!!
     lateinit var subscriptionsAdapter: SubscriptionAdapter
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,18 +60,12 @@ class SubscriptionsFragment : Fragment() {
 
     private fun setupRecyclerView() = binding.rvSubscriptions.apply {
 
-        var subscriptionList = mutableListOf(
-            Subscription("Netflix", "May 11", "$17"),
-            Subscription("Youtube Premium", "May 18", "$5"),
-            Subscription("HBO GO", "May 30", "$12"),
-            Subscription("Youtube Kids", "April 1", "$75"),
-            Subscription("PH", "December 1", "$22"),
-            Subscription("Spotify", "July 22", "$2"),
-            Subscription("Tik Tok Premium", "July 7", "$10"),
-            Subscription("Snapchat", "September 17", "$6")
-        )
-        subscriptionsAdapter = SubscriptionAdapter(subscriptionList)
-        adapter = subscriptionsAdapter
-        layoutManager = LinearLayoutManager(requireContext())
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.subscriptionList.collect {
+                subscriptionsAdapter = SubscriptionAdapter(it)
+                adapter = subscriptionsAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
     }
 }
