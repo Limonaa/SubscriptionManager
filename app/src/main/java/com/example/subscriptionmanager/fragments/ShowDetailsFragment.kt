@@ -15,6 +15,9 @@ import com.example.subscriptionmanager.data.Person
 import com.example.subscriptionmanager.databinding.FragmentShowDetailsBinding
 import com.example.subscriptionmanager.viewmodels.MainViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Date
 
 class ShowDetailsFragment : Fragment() {
 
@@ -44,6 +47,7 @@ class ShowDetailsFragment : Fragment() {
                 binding.tvSubName.text = it?.name
                 binding.tvSubPrice.text = "Cena: ${it?.price}PLN"
                 binding.tvNextPayment.text = it?.paymentDate
+                //TODO payment destination
             }
         }
         personAdapter.setOnItemClickListener {
