@@ -15,6 +15,9 @@ import com.example.subscriptionmanager.data.Person
 import com.example.subscriptionmanager.databinding.FragmentShowDetailsBinding
 import com.example.subscriptionmanager.viewmodels.MainViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Date
 
 class ShowDetailsFragment : Fragment() {
 
@@ -44,15 +47,11 @@ class ShowDetailsFragment : Fragment() {
                 binding.tvSubName.text = it?.name
                 binding.tvSubPrice.text = "Cena: ${it?.price}PLN"
                 binding.tvNextPayment.text = it?.paymentDate
+                //TODO payment destination
             }
         }
         personAdapter.setOnItemClickListener {
-//            val bundle = Bundle().apply {
-//                putSerializable("person", it)
-//            }
-//            findNavController().navigate(
-//
-//            )
+            //TODO  Show dialog to edit persons information
             Toast.makeText(requireContext(), "Clicked on person!", Toast.LENGTH_SHORT).show()
         }
 
@@ -63,8 +62,9 @@ class ShowDetailsFragment : Fragment() {
                 "Jutro",
                 "10",
                 null
+                )
             )
-            )
+            //TODO  Add dialog to add person
             setRecyclerView()
         }
 
