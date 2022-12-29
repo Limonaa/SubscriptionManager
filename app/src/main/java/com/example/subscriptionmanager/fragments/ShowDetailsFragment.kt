@@ -47,12 +47,7 @@ class ShowDetailsFragment : Fragment() {
             }
         }
         personAdapter.setOnItemClickListener {
-//            val bundle = Bundle().apply {
-//                putSerializable("person", it)
-//            }
-//            findNavController().navigate(
-//
-//            )
+            //TODO  Show dialog to edit persons information
             Toast.makeText(requireContext(), "Clicked on person!", Toast.LENGTH_SHORT).show()
         }
 
@@ -63,8 +58,9 @@ class ShowDetailsFragment : Fragment() {
                 "Jutro",
                 "10",
                 null
+                )
             )
-            )
+            //TODO  Add dialog to add person
             setRecyclerView()
         }
 

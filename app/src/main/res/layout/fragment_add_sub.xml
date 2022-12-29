@@ -52,56 +52,48 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
-
-
-
-
             </LinearLayout>
 
         </HorizontalScrollView>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/subName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:hint="name"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
 
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ti_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/subPrice"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:hint="price"
-        android:layout_marginTop="20dp"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:suffixText="PLN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subName">
+        app:layout_constraintTop_toBottomOf="@+id/subName"
+        app:suffixText="PLN">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ti_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="4"/>
+            android:maxLength="4" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,10 +101,25 @@
         android:id="@+id/datePickerBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Wybierz datę"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subPrice" />
+
+    <Button
+        android:id="@+id/btn_image_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Wybierz zdjęcię"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/datePickerBtn" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_save"
@@ -123,8 +130,6 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
