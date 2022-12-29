@@ -1,5 +1,6 @@
 package com.example.subscriptionmanager.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -17,13 +18,18 @@ class SubscriptionAdapter (
         return SubscriptionViewHolder(ItemSubscriptionBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     override fun onBindViewHolder(holder: SubscriptionViewHolder, position: Int) {
 
         holder.binding.apply {
             tvSubName.text = subscriptions[position].name
             tvSubPayment.text = subscriptions[position].paymentDate
-            tvSubPrice.text = subscriptions[position].price
-//        Setup subscription image
+            tvSubPrice.text = "${subscriptions[position].price}PLN"
+            ivImage.setImageDrawable(subscriptions[position].image?.let {
+                holder.itemView.context.getDrawable(
+                    it
+                )
+            })
         }
 
         holder.binding.root.setOnClickListener {

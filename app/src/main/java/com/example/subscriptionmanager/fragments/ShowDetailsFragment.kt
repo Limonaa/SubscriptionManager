@@ -1,22 +1,27 @@
 package com.example.subscriptionmanager.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.subscriptionmanager.adapters.PersonAdapter
 import com.example.subscriptionmanager.data.Person
 import com.example.subscriptionmanager.databinding.FragmentShowDetailsBinding
+import com.example.subscriptionmanager.viewmodels.MainViewModel
+import kotlinx.coroutines.launch
 
 class ShowDetailsFragment : Fragment() {
 
     private var _binding: FragmentShowDetailsBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var peopleAdapter: PersonAdapter
+    lateinit var personAdapter: PersonAdapter
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,16 +29,24 @@ class ShowDetailsFragment : Fragment() {
     ): View? {
 
         _binding = FragmentShowDetailsBinding.inflate(inflater, container, false)
-        setupRecyclerView()
 
+        setRecyclerView()
         return binding.root
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        peopleAdapter.setOnItemClickListener {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.selectedSubscription.collect {
+                binding.tvSubName.text = it?.name
+                binding.tvSubPrice.text = "Cena: ${it?.price}PLN"
+                binding.tvNextPayment.text = it?.paymentDate
+            }
+        }
+        personAdapter.setOnItemClickListener {
 //            val bundle = Bundle().apply {
 //                putSerializable("person", it)
 //            }
@@ -43,6 +56,18 @@ class ShowDetailsFragment : Fragment() {
             Toast.makeText(requireContext(), "Clicked on person!", Toast.LENGTH_SHORT).show()
         }
 
+        binding.fabAddPerson.setOnClickListener {
+            viewModel.addPerson(
+                Person(
+                "Adam",
+                "Jutro",
+                "10",
+                null
+            )
+            )
+            setRecyclerView()
+        }
+
     }
 
     override fun onDestroyView() {
@@ -50,14 +75,13 @@ class ShowDetailsFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupRecyclerView() = binding.rvPeople.apply {
-        val peopleList = mutableListOf(
-            Person("Andrzej Mak", "8PLN", "Ostatnio zapłacono: 18 października 2022", null),
-            Person("Maria Grabowska", "8PLN", "Ostatnio zapłacono: 2 października 2022", null),
-            Person("Marek Łuszkiewicz", "8PLN", "Ostatnio zapłacono: 30 października 2022", null)
-        )
-        peopleAdapter = PersonAdapter(peopleList)
-        adapter = peopleAdapter
-        layoutManager = LinearLayoutManager(requireContext())
+    private fun setRecyclerView() = binding.rvPeople.apply {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.peopleList.collect {
+                personAdapter = PersonAdapter(it)
+                adapter = personAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
     }
 }
