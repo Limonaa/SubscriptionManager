@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.subscriptionmanager.R
 import com.example.subscriptionmanager.adapters.PersonAdapter
 import com.example.subscriptionmanager.data.Person
 import com.example.subscriptionmanager.databinding.FragmentShowDetailsBinding
@@ -16,12 +16,16 @@ class ShowDetailsFragment : Fragment() {
     private var _binding: FragmentShowDetailsBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var peopleAdapter: PersonAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentShowDetailsBinding.inflate(inflater, container, false)
+        setupRecyclerView()
+
         return binding.root
 
     }
@@ -29,19 +33,31 @@ class ShowDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        peopleAdapter.setOnItemClickListener {
+//            val bundle = Bundle().apply {
+//                putSerializable("person", it)
+//            }
+//            findNavController().navigate(
+//
+//            )
+            Toast.makeText(requireContext(), "Clicked on person!", Toast.LENGTH_SHORT).show()
+        }
 
-        val peopleList = mutableListOf(
-            Person("Jacek Marko", "22 września", "22PLN", R.drawable.avatar1),
-            Person("Maja Kwiatczyńska", "17 grudnia", "7PLN", R.drawable.avatar2),
-            Person("Maciej Kuźdup", "28 lutego", "112PLN", R.drawable.avatar3)
-        )
-        val adapter = PersonAdapter(peopleList)
-        binding.rvPeople.adapter = adapter
-        binding.rvPeople.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setupRecyclerView() = binding.rvPeople.apply {
+        val peopleList = mutableListOf(
+            Person("Andrzej Mak", "8PLN", "Ostatnio zapłacono: 18 października 2022", null),
+            Person("Maria Grabowska", "8PLN", "Ostatnio zapłacono: 2 października 2022", null),
+            Person("Marek Łuszkiewicz", "8PLN", "Ostatnio zapłacono: 30 października 2022", null)
+        )
+        peopleAdapter = PersonAdapter(peopleList)
+        adapter = peopleAdapter
+        layoutManager = LinearLayoutManager(requireContext())
     }
 }

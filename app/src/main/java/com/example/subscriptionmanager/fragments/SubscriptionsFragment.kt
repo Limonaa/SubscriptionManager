@@ -16,7 +16,8 @@ class SubscriptionsFragment : Fragment() {
 
     private var _binding: FragmentSubscriptionsBinding? = null
     private val binding get() = _binding!!
-    lateinit var subscriptionsAdapter: SubscriptionAdapter
+
+    private lateinit var subscriptionAdapter: SubscriptionAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +39,7 @@ class SubscriptionsFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
-        subscriptionsAdapter.setOnItemClickListener {
+        subscriptionAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("subscription", it)
             }
@@ -66,8 +67,8 @@ class SubscriptionsFragment : Fragment() {
             Subscription("Tik Tok Premium", "July 7", "$10"),
             Subscription("Snapchat", "September 17", "$6")
         )
-        subscriptionsAdapter = SubscriptionAdapter(subscriptionList)
-        adapter = subscriptionsAdapter
+        subscriptionAdapter = SubscriptionAdapter(subscriptionList)
+        adapter = subscriptionAdapter
         layoutManager = LinearLayoutManager(requireContext())
     }
 }

@@ -25,6 +25,7 @@ class SubscriptionAdapter (
             tvSubPrice.text = subscriptions[position].price
 //        Setup subscription image
         }
+
         holder.binding.root.setOnClickListener {
             onItemClickListener?.let {
                 it(subscriptions[position])
@@ -36,7 +37,7 @@ class SubscriptionAdapter (
         return subscriptions.size
     }
 
-    private var onItemClickListener: ((Subscription) -> Unit)? = null
+    private var onItemClickListener : ((Subscription) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (Subscription) -> Unit) {
         onItemClickListener = listener

@@ -22,8 +22,8 @@ class PersonAdapter (
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
 
         holder.binding.apply {
-            tvName.text = peopleList[position].name
-            tvPrice.text = peopleList[position].price
+            tvPersonName.text = peopleList[position].name
+            tvPersonPrice.text = peopleList[position].price
             tvPayTime.text = peopleList[position].payTime
             ivAvatar.setImageDrawable(peopleList[position].avatar?.let {
                 holder.itemView.context.getDrawable(
@@ -34,7 +34,12 @@ class PersonAdapter (
     }
 
     override fun getItemCount(): Int {
-
         return peopleList.size
+    }
+
+    private var onItemClickListener : ((Person) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Person) -> Unit) {
+        onItemClickListener = listener
     }
 }
