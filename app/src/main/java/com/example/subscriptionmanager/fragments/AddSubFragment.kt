@@ -1,7 +1,6 @@
 package com.example.subscriptionmanager.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +12,6 @@ import com.example.subscriptionmanager.data.Subscription
 import com.example.subscriptionmanager.databinding.FragmentAddSubBinding
 import com.example.subscriptionmanager.viewmodels.MainViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
-import java.sql.Time
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -75,6 +71,10 @@ class AddSubFragment : Fragment() {
 
         binding.btnImagePicker.setOnClickListener {
             //TODO add image
+        }
+
+        binding.chipNetflix.setOnClickListener {
+            binding.tiName.setText("Netflix")
         }
     }
 

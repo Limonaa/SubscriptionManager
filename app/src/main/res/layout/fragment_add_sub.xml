@@ -6,94 +6,122 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AddSubFragment">
 
-        <HorizontalScrollView
-            android:id="@+id/horizontalScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp">
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:singleLine="true">
 
-                <com.google.android.material.chip.ChipGroup
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_netflix"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:text="Netflix"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_netflix"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Netflix"
-                        android:textSize="16sp"
-                        app:chipIcon="@drawable/netflix_icon_161073"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_spotify"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spotify"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chip_spotify"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Spotify"
-                        android:textSize="16sp"
-                        app:chipIcon="@drawable/netflix_icon_161073"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_disney"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Disney+"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Snapchat"
-                        android:textSize="16sp"
-                        app:chipIcon="@drawable/netflix_icon_161073"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_hbo_max"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HBO MAX"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="16sp"
-                        app:chipIcon="@drawable/netflix_icon_161073"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_tidal"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidal"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="16sp"
-                        app:chipIcon="@drawable/netflix_icon_161073"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_yt_premium"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="YT Premium"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="16sp"
-                        app:chipIcon="@drawable/netflix_icon_161073"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_legimi"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Legimi"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="16sp"
-                        app:chipIcon="@drawable/netflix_icon_161073"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_bookbeat"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bookbeat"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="16sp"
-                        app:chipIcon="@drawable/netflix_icon_161073"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_game_pass"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Xbox Game Pass"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                    <com.google.android.material.chip.Chip
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="16sp"
-                        app:chipIcon="@drawable/netflix_icon_161073"/>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_amazon_prime"
+                    style="@style/Widget.MaterialComponents.Chip.Action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amazon Prime"
+                    android:textSize="16sp"
+                    app:chipIcon="@drawable/netflix_icon_161073" />
 
-                </com.google.android.material.chip.ChipGroup>
+            </com.google.android.material.chip.ChipGroup>
 
-            </LinearLayout>
+        </LinearLayout>
 
-        </HorizontalScrollView>
+    </HorizontalScrollView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/subName"
@@ -103,7 +131,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:hint="name"
+        android:hint="Nazwa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
@@ -122,7 +150,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:hint="price"
+        android:hint="Kwota"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subName"
