@@ -15,15 +15,12 @@ import com.example.subscriptionmanager.data.Person
 import com.example.subscriptionmanager.databinding.FragmentShowDetailsBinding
 import com.example.subscriptionmanager.viewmodels.MainViewModel
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.util.Date
 
 class ShowDetailsFragment : Fragment() {
 
     private var _binding: FragmentShowDetailsBinding? = null
     private val binding get() = _binding!!
-    lateinit var personAdapter: PersonAdapter
+    private lateinit var personAdapter: PersonAdapter
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -61,7 +58,6 @@ class ShowDetailsFragment : Fragment() {
                 "Adam",
                 "Jutro",
                 "10",
-                null
                 )
             )
             //TODO  Add dialog to add person

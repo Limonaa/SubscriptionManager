@@ -2,6 +2,7 @@ package com.example.subscriptionmanager.other
 
 import com.example.subscriptionmanager.R
 import com.example.subscriptionmanager.data.Company
+
 object Constans {
 
     val COMPANIES = listOf(
@@ -16,5 +17,7 @@ object Constans {
     Company("Legimi", R.drawable.netflix_icon_161073),
     Company("Bookbeat", R.drawable.netflix_icon_161073),
     )
+
+    val MONTHS = listOf("Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień")
 }
 

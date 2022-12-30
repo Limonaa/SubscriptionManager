@@ -1,11 +1,12 @@
 package com.example.subscriptionmanager.fragments
 
+import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -15,15 +16,12 @@ import com.example.subscriptionmanager.databinding.FragmentAddSubBinding
 import com.example.subscriptionmanager.other.Constans
 import com.example.subscriptionmanager.viewmodels.MainViewModel
 import com.google.android.material.chip.Chip
-import com.google.android.material.datepicker.MaterialDatePicker
-import java.text.SimpleDateFormat
 import java.util.*
 
 class AddSubFragment : Fragment() {
 
     private var _binding: FragmentAddSubBinding? = null
     private val binding get() = _binding!!
-    private var date: String = ""
 
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -36,64 +34,25 @@ class AddSubFragment : Fragment() {
         return binding.root
     }
 
-    private fun showDatePicker(){
-        val datePicker =
-            MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select date")
-                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                .build()
-
-        datePicker.addOnPositiveButtonClickListener {
-            val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-            date = "${calendar.get(Calendar.DAY_OF_MONTH)} ${SimpleDateFormat("MMMM").format(calendar.get(Calendar.MONTH))} ${calendar.get(Calendar.YEAR)}"
-        }
-
-        //TODO FIX DATE
-
-        datePicker.show(parentFragmentManager, "DP")
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.datePickerBtn.setOnClickListener{
-            showDatePicker()
-        }
 
+        setupChips()
+
+        binding.tiDate.setOnClickListener{
+            showCalendar()
+        }
 
         binding.btnSave.setOnClickListener {
-            viewModel.addSubscription(Subscription(
-                1, //TODO set ID for subscriptions
-                binding.tiName.text.toString(),
-                date,
-                binding.tiPrice.text.toString(),
-                R.drawable.netflix_icon_161073
-            ))
-
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            saveNewSubscription()
         }
 
-        binding.btnImagePicker.setOnClickListener {
-            //TODO add image
+        binding.ivImage.setOnClickListener {
+            selectPhoto()
         }
 
-        for (item in Constans.COMPANIES) {
-
-            val chip = Chip(requireContext(), null, com.google.android.material.R.style.Widget_Material3_Chip_Suggestion)
-            chip.apply {
-                id = ViewCompat.generateViewId()
-                text = item.name
-                setChipIconResource(item.image)
-
-                setOnClickListener {
-                    binding.tiName.setText(chip.text)
-                    //TODO add image
-                }
-            }
-            binding.chipGroup.addView(chip)
-
-        }
     }
 
     override fun onDestroyView() {
@@ -101,5 +60,54 @@ class AddSubFragment : Fragment() {
         _binding = null
     }
 
+    private fun setupChips() {
 
+        for (item in Constans.COMPANIES) {
+            val chip = Chip(requireContext(), null, com.google.android.material.R.style.Widget_Material3_Chip_Suggestion)
+            chip.apply {
+                id = ViewCompat.generateViewId()
+                text = item.name
+                //TODO set chip icon resource (in Constans.COMPANIES)
+                setChipIconResource(item.image)
+                setOnClickListener {
+                    binding.tiName.setText(chip.text)
+                    //TODO add image
+                }
+            }
+            binding.chipGroup.addView(chip)
+        }
+    }
+
+    private fun saveNewSubscription() {
+
+        viewModel.addSubscription(Subscription(
+            ViewCompat.generateViewId(),
+            binding.tiName.text.toString(),
+            binding.tiDate.text.toString(),
+            binding.tiPrice.text.toString(),
+            R.drawable.netflix_icon_161073
+        // TODO replace drawable with selected photo
+        // TODO OR if empty replace drawable with image of subscription's first letter
+            )
+        )
+        findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun showCalendar() {
+
+        val c = Calendar.getInstance(TimeZone.getTimeZone("ECT"))
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val dpd = DatePickerDialog(requireContext(), { _, year, monthOfYear, dayOfMonth ->
+            binding.tiDate.setText("$dayOfMonth/$monthOfYear/$year")
+        }, year, month, day)
+        dpd.show()
+    }
+
+    private fun selectPhoto() {
+
+        //TODO select photo from gallery
+    }
 }
