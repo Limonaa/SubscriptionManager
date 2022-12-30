@@ -5,12 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.subscriptionmanager.R
 import com.example.subscriptionmanager.data.Subscription
 import com.example.subscriptionmanager.databinding.FragmentAddSubBinding
+import com.example.subscriptionmanager.other.Constans
 import com.example.subscriptionmanager.viewmodels.MainViewModel
+import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,9 +45,10 @@ class AddSubFragment : Fragment() {
 
         datePicker.addOnPositiveButtonClickListener {
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-            calendar.time = Date(it)
             date = "${calendar.get(Calendar.DAY_OF_MONTH)} ${SimpleDateFormat("MMMM").format(calendar.get(Calendar.MONTH))} ${calendar.get(Calendar.YEAR)}"
         }
+
+        //TODO FIX DATE
 
         datePicker.show(parentFragmentManager, "DP")
 
@@ -73,8 +78,21 @@ class AddSubFragment : Fragment() {
             //TODO add image
         }
 
-        binding.chipNetflix.setOnClickListener {
-            binding.tiName.setText("Netflix")
+        for (item in Constans.COMPANIES) {
+
+            val chip = Chip(requireContext(), null, com.google.android.material.R.style.Widget_Material3_Chip_Suggestion)
+            chip.apply {
+                id = ViewCompat.generateViewId()
+                text = item.name
+                setChipIconResource(item.image)
+
+                setOnClickListener {
+                    binding.tiName.setText(chip.text)
+                    //TODO add image
+                }
+            }
+            binding.chipGroup.addView(chip)
+
         }
     }
 
