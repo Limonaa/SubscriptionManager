@@ -19,7 +19,7 @@ class SubscriptionsFragment : Fragment() {
 
     private var _binding: FragmentSubscriptionsBinding? = null
     private val binding get() = _binding!!
-    lateinit var subscriptionsAdapter: SubscriptionAdapter
+    private lateinit var subscriptionsAdapter: SubscriptionAdapter
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(

@@ -25,11 +25,6 @@ class PersonAdapter (
             tvPersonName.text = peopleList[position].name
             tvPersonPrice.text = peopleList[position].price
             tvPayTime.text = peopleList[position].payTime
-            ivAvatar.setImageDrawable(peopleList[position].avatar?.let {
-                holder.itemView.context.getDrawable(
-                    it
-                )
-            })
         }
     }
 
