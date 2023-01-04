@@ -1,12 +1,23 @@
 package com.example.subscriptionmanager.fragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -24,6 +35,8 @@ class AddSubFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: MainViewModel by activityViewModels()
+    var pickedPhoto: Uri? = null
+    var pickedBitMap: Bitmap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,6 +121,17 @@ class AddSubFragment : Fragment() {
 
     private fun selectPhoto() {
 
+        val intent = Intent(Intent(Intent.ACTION_PICK))
+        intent.type = "image/*"
+        startActivityForResult(intent, 100)
         //TODO select photo from gallery
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
+            binding.ivImage.setImageURI(data?.data)
+        }
     }
 }
