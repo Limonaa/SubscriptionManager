@@ -35,10 +35,11 @@
     </HorizontalScrollView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/dv_image"
+        android:id="@+id/cv_image"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginTop="8dp"
+        android:clickable="true"
         app:cardCornerRadius="80dp"
         app:strokeWidth="0dp"
         app:cardBackgroundColor="@color/surface_1"
@@ -78,7 +79,7 @@
         android:hint="Nazwa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dv_image">
+        app:layout_constraintTop_toBottomOf="@+id/cv_image">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ti_name"

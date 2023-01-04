@@ -3,7 +3,7 @@ package com.example.subscriptionmanager.other
 import com.example.subscriptionmanager.R
 import com.example.subscriptionmanager.data.Company
 
-object Constans {
+object Constants {
 
     val COMPANIES = listOf(
     Company("Netflix", R.drawable.netflix_icon_161073),
@@ -19,5 +19,7 @@ object Constans {
     )
 
     val MONTHS = listOf("Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień")
+
+    const val IMAGE_REQUEST_CODE: Int = 100
 }
 

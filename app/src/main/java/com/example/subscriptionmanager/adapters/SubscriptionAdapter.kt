@@ -25,11 +25,7 @@ class SubscriptionAdapter (
             tvSubName.text = subscriptions[position].name
             tvSubPayment.text = subscriptions[position].paymentDate
             tvSubPrice.text = "${subscriptions[position].price}PLN"
-            ivImage.setImageDrawable(subscriptions[position].image?.let {
-                holder.itemView.context.getDrawable(
-                    it
-                )
-            })
+            ivImage.setImageBitmap(subscriptions[position].image)
         }
 
         holder.binding.root.setOnClickListener {
