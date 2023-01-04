@@ -4,20 +4,16 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.ImageDecoder
+import android.graphics.Color
 import android.net.Uri
-import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -35,8 +31,6 @@ class AddSubFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: MainViewModel by activityViewModels()
-    var pickedPhoto: Uri? = null
-    var pickedBitMap: Bitmap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,7 +92,7 @@ class AddSubFragment : Fragment() {
             binding.tiName.text.toString(),
             binding.tiDate.text.toString(),
             binding.tiPrice.text.toString(),
-            R.drawable.netflix_icon_161073
+            ContextCompat.getDrawable(requireContext(), R.drawable.netflix_icon_161073)?.toBitmap()
         // TODO replace drawable with selected photo
         // TODO OR if empty replace drawable with image of subscription's first letter
             )
@@ -132,6 +126,7 @@ class AddSubFragment : Fragment() {
 
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             binding.ivImage.setImageURI(data?.data)
+            binding.ivImage.setColorFilter(Color.argb(0, 0, 0, 0))
         }
     }
 }
