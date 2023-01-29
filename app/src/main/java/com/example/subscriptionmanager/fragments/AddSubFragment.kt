@@ -5,13 +5,16 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
+import android.icu.util.LocaleData
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.graphics.drawable.toDrawable
+import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +24,9 @@ import com.example.subscriptionmanager.databinding.FragmentAddSubBinding
 import com.example.subscriptionmanager.other.Constants
 import com.example.subscriptionmanager.viewmodels.MainViewModel
 import com.google.android.material.chip.Chip
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 class AddSubFragment : Fragment() {
@@ -28,6 +34,7 @@ class AddSubFragment : Fragment() {
     private var _binding: FragmentAddSubBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MainViewModel by activityViewModels()
+    private var pickedImage: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +49,6 @@ class AddSubFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         setupChips()
 
         binding.tiDate.setOnClickListener{
@@ -50,7 +56,7 @@ class AddSubFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener {
-            saveNewSubscription()
+            checkRequirements()
         }
 
         binding.ivImage.setOnClickListener {
@@ -75,26 +81,48 @@ class AddSubFragment : Fragment() {
                 setChipIconResource(item.image)
                 setOnClickListener {
                     binding.tiName.setText(chip.text)
-                    //TODO add image
+                    binding.ivImage.apply {
+                        setImageBitmap(chipIcon?.toBitmap())
+                        setColorFilter(Color.argb(0, 0, 0, 0))
+                        pickedImage = chipIcon.toString().toUri()
+                    }
                 }
             }
             binding.chipGroup.addView(chip)
         }
     }
 
+    private fun checkRequirements() {
+
+        if (binding.tiName.text.isNullOrEmpty() || binding.tiPrice.text.isNullOrEmpty() || binding.tiDate.text.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "Wypełnij pola", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            saveNewSubscription()
+        }
+    }
+
     private fun saveNewSubscription() {
 
-        //TODO check if ivImage is equal to drawable insert_image
-        //TODO then replace image with first letter of sub name
-
-        viewModel.addSubscription(Subscription(
-            ViewCompat.generateViewId(),
-            binding.tiName.text.toString(),
-            binding.tiDate.text.toString(),
-            binding.tiPrice.text.toString(),
-            binding.ivImage.drawable.toBitmap()
-            )
-        )
+        if (pickedImage != null) {
+            viewModel.addSubscription(Subscription(
+                ViewCompat.generateViewId(),
+                binding.tiName.text.toString(),
+                binding.tiDate.text.toString(),
+                binding.tiPrice.text.toString(),
+                binding.ivImage.drawable.toBitmap(),
+                ""
+            ))
+        } else {
+            viewModel.addSubscription(Subscription(
+                ViewCompat.generateViewId(),
+                binding.tiName.text.toString(),
+                binding.tiDate.text.toString(),
+                binding.tiPrice.text.toString(),
+                null, //TODO create colorful drawable and randomly replace image,
+            ""
+            ))
+        }
         findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
     }
 
@@ -123,7 +151,8 @@ class AddSubFragment : Fragment() {
 
         //IMAGE FOR SUBSCRIPTION
         if (requestCode == Constants.IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            binding.ivImage.setImageURI(data?.data)
+            pickedImage = data?.data
+            binding.ivImage.setImageURI(pickedImage)
             binding.ivImage.setColorFilter(Color.argb(0, 0, 0, 0))
         }
     }

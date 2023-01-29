@@ -41,6 +41,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:id="@+id/tv_sub_name"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
