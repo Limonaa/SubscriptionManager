@@ -18,13 +18,12 @@ class PersonAdapter (
         return PersonViewHolder(ItemPersonBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
 
         holder.binding.apply {
             tvPersonName.text = peopleList[position].name
-            tvPersonPrice.text = peopleList[position].price
-            tvPayTime.text = peopleList[position].payTime
+            tvPersonPrice.text = "${peopleList[position].price} PLN"
         }
     }
 

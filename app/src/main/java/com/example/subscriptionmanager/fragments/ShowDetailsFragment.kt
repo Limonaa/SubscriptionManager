@@ -46,8 +46,11 @@ class ShowDetailsFragment : Fragment() {
                 binding.tvSubName.text = it?.name
                 binding.tvSubPrice.text = "Cena: ${it?.price}PLN"
                 binding.tvNextPayment.text = it?.paymentDate
+                binding.imageView.setImageBitmap(it?.image)
                 //TODO payment destination
+                //TODO calculate spent money
             }
+            //TODO rounded image
         }
 
         binding.fabAddPerson.setOnClickListener {
@@ -87,7 +90,6 @@ class ShowDetailsFragment : Fragment() {
                 viewModel.addPerson(
                     Person(
                         editTextName.toString(),
-                        "",
                         editTextPrice.toString()
                     )
                 )
