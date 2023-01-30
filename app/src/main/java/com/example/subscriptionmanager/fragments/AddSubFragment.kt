@@ -96,6 +96,9 @@ class AddSubFragment : Fragment() {
         if (binding.tiName.text.isNullOrEmpty() || binding.tiPrice.text.isNullOrEmpty() || binding.tiDate.text.isNullOrEmpty()) {
             Toast.makeText(requireContext(), "Wypełnij pola", Toast.LENGTH_SHORT).show()
         }
+        else if (binding.tiPrice.text.toString().toDoubleOrNull() == null) {
+            Toast.makeText(requireContext(), "Błedna kwota", Toast.LENGTH_SHORT).show()
+        }
         else {
             saveNewSubscription()
         }
@@ -115,9 +118,7 @@ class AddSubFragment : Fragment() {
             ))
         } else {
 
-            val colorList = listOf(R.color.redIcon, R.color.purpleIcon, R.color.blueIcon, R.color.tealIcon, R.color.limeIcon, R.color.orangeIcon, R.color.deepOrangeIcon)
-            val backgroundColor = colorList[abs(binding.tiName.text.toString().hashCode()) % colorList.size]
-
+            val backgroundColor = Constants.ICON_COLORS[abs(binding.tiName.text.toString().hashCode()) % Constants.ICON_COLORS.size]
             viewModel.addSubscription(Subscription(
                 ViewCompat.generateViewId(),
                 binding.tiName.text.toString(),
