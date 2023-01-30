@@ -54,7 +54,7 @@ class ShowDetailsFragment : Fragment() {
         }
 
         binding.fabAddPerson.setOnClickListener {
-            showPersonDialog()
+            showAddPersonDialog()
         }
 
     }
@@ -76,7 +76,7 @@ class ShowDetailsFragment : Fragment() {
         }
     }
 
-    private fun showPersonDialog() {
+    private fun showAddPersonDialog() {
 
         val builder = MaterialAlertDialogBuilder(requireContext())
         val inflater = layoutInflater

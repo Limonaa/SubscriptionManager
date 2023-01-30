@@ -25,6 +25,12 @@ class PersonAdapter (
             tvPersonName.text = peopleList[position].name
             tvPersonPrice.text = "${peopleList[position].price} PLN"
         }
+
+        holder.binding.root.setOnClickListener {
+            onItemClickListener?.let {
+                it(peopleList[position])
+            }
+        }
     }
 
     override fun getItemCount(): Int {
