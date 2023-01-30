@@ -46,7 +46,11 @@ class ShowDetailsFragment : Fragment() {
                 binding.tvSubName.text = it?.name
                 binding.tvSubPrice.text = "Cena: ${it?.price}PLN"
                 binding.tvNextPayment.text = it?.paymentDate
-                binding.imageView.setImageBitmap(it?.image)
+                binding.imageViewIcon.setImageBitmap(it?.image)
+                it?.backgroundColor?.let { color -> binding.vImage.setBackgroundColor(color) }
+                if (it?.image == null) {
+                    binding.tvImage.text = it?.name?.first().toString()
+                }
                 //TODO payment destination
                 //TODO calculate spent money
             }

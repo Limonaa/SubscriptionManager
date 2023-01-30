@@ -19,6 +19,7 @@ object Constants {
     )
 
     val MONTHS = listOf("Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień")
+    val ICON_COLORS = listOf(R.color.redIcon, R.color.purpleIcon, R.color.blueIcon, R.color.tealIcon, R.color.limeIcon, R.color.orangeIcon, R.color.deepOrangeIcon, R.color.indigoIcon)
 
     const val IMAGE_REQUEST_CODE: Int = 100
 }

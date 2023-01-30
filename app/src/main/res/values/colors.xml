@@ -61,4 +61,12 @@
     <color name="md_theme_dark_surfaceTint">#ADC6FF</color>
     <color name="md_theme_dark_outlineVariant">#44474F</color>
     <color name="md_theme_dark_scrim">#000000</color>
+    <color name="redIcon">#F44336</color>
+    <color name="purpleIcon">#9C27B0</color>
+    <color name="blueIcon">#2196F3</color>
+    <color name="tealIcon">#009688</color>
+    <color name="limeIcon">#CDDC39</color>
+    <color name="orangeIcon">#FF9800</color>
+    <color name="deepOrangeIcon">#FF5722</color>
+    <color name="indigoIcon">#3F51B5</color>
 </resources>
