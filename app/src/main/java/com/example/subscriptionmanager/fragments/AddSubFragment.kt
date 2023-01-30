@@ -5,7 +5,6 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Color
-import android.icu.util.LocaleData
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -24,9 +23,6 @@ import com.example.subscriptionmanager.databinding.FragmentAddSubBinding
 import com.example.subscriptionmanager.other.Constants
 import com.example.subscriptionmanager.viewmodels.MainViewModel
 import com.google.android.material.chip.Chip
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 
 class AddSubFragment : Fragment() {
@@ -39,7 +35,7 @@ class AddSubFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentAddSubBinding.inflate(inflater, container, false)
         return binding.root
