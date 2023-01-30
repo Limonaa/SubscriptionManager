@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
@@ -24,6 +26,7 @@ import com.example.subscriptionmanager.other.Constants
 import com.example.subscriptionmanager.viewmodels.MainViewModel
 import com.google.android.material.chip.Chip
 import java.util.*
+import kotlin.math.abs
 
 class AddSubFragment : Fragment() {
 
@@ -56,7 +59,8 @@ class AddSubFragment : Fragment() {
         }
 
         binding.ivImage.setOnClickListener {
-            selectPhoto()
+//            selectPhoto()
+            selectPhotoForResult()
         }
 
     }
@@ -73,7 +77,6 @@ class AddSubFragment : Fragment() {
             chip.apply {
                 id = ViewCompat.generateViewId()
                 text = item.name
-                //TODO set chip icon resource (in Constants.COMPANIES)
                 setChipIconResource(item.image)
                 setOnClickListener {
                     binding.tiName.setText(chip.text)
@@ -107,16 +110,22 @@ class AddSubFragment : Fragment() {
                 binding.tiDate.text.toString(),
                 binding.tiPrice.text.toString(),
                 binding.ivImage.drawable.toBitmap(),
+                null,
                 ""
             ))
         } else {
+
+            val colorList = listOf(R.color.redIcon, R.color.purpleIcon, R.color.blueIcon, R.color.tealIcon, R.color.limeIcon, R.color.orangeIcon, R.color.deepOrangeIcon)
+            val backgroundColor = colorList[abs(binding.tiName.text.toString().hashCode()) % colorList.size]
+
             viewModel.addSubscription(Subscription(
                 ViewCompat.generateViewId(),
                 binding.tiName.text.toString(),
                 binding.tiDate.text.toString(),
                 binding.tiPrice.text.toString(),
-                null, //TODO create colorful drawable and randomly replace image,
-            ""
+                null,
+                ContextCompat.getColor(requireContext(), backgroundColor),
+                binding.tiName.text?.first().toString().uppercase()
             ))
         }
         findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
@@ -135,19 +144,16 @@ class AddSubFragment : Fragment() {
         dpd.show()
     }
 
-    private fun selectPhoto() {
-
+    private fun selectPhotoForResult() {
         val intent = Intent(Intent(Intent.ACTION_PICK))
         intent.type = "image/*"
-        startActivityForResult(intent, Constants.IMAGE_REQUEST_CODE)
+        resultLauncher.launch(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        //IMAGE FOR SUBSCRIPTION
-        if (requestCode == Constants.IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            pickedImage = data?.data
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            pickedImage = Objects.requireNonNull(data)?.data
             binding.ivImage.setImageURI(pickedImage)
             binding.ivImage.setColorFilter(Color.argb(0, 0, 0, 0))
         }

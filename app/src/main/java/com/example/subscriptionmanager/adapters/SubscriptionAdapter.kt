@@ -3,6 +3,7 @@ package com.example.subscriptionmanager.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subscriptionmanager.data.Subscription
 import com.example.subscriptionmanager.databinding.ItemSubscriptionBinding
@@ -27,6 +28,7 @@ class SubscriptionAdapter (
             tvSubPrice.text = "${subscriptions[position].price}PLN"
             ivImage.setImageBitmap(subscriptions[position].image)
             tvImage.text = subscriptions[position].textImage
+            subscriptions[position].backgroundColor?.let { vImage.setBackgroundColor(it) }
         }
 
         holder.binding.root.setOnClickListener {
