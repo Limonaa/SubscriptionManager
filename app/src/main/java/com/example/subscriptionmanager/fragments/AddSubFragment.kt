@@ -130,7 +130,7 @@ class AddSubFragment : Fragment() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
         val dpd = DatePickerDialog(requireContext(), { _, year, monthOfYear, dayOfMonth ->
-            binding.tiDate.setText("$dayOfMonth/$monthOfYear/$year")
+            binding.tiDate.setText("$dayOfMonth/${monthOfYear+1}/$year")
         }, year, month, day)
         dpd.show()
     }
