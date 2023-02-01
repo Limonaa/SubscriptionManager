@@ -3,9 +3,12 @@ package com.example.subscriptionmanager.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.subscriptionmanager.data.Person
 import com.example.subscriptionmanager.databinding.ItemPersonBinding
+import com.example.subscriptionmanager.viewmodels.MainViewModel
 
 class PersonAdapter (
     private var peopleList: List<Person>
@@ -30,6 +33,10 @@ class PersonAdapter (
             onItemClickListener?.let {
                 it(peopleList[position])
             }
+        }
+
+        holder.binding.fabRemovePerson.setOnClickListener {
+
         }
     }
 

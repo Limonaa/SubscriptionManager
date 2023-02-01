@@ -47,7 +47,26 @@ class ShowDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        countDaysBetween()
+        binding.fabAddPerson.setOnClickListener {
+            showAddPersonDialog()
+        }
+
+        personAdapter.setOnItemClickListener {
+
+            val builder = MaterialAlertDialogBuilder(requireContext())
+
+            with(builder) {
+                setTitle("Czy chcesz usunąć tę osobę")
+                setPositiveButton("Usuń") {dialog, which ->
+                    viewModel.peopleList.value.remove(it)
+                    personAdapter.notifyDataSetChanged()
+                }
+                setNegativeButton("Anuluj") {dialog, which ->
+
+                }
+                show()
+            }
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectedSubscription.collect {
@@ -69,10 +88,6 @@ class ShowDetailsFragment : Fragment() {
                 }
             }
             //TODO rounded image
-        }
-
-        binding.fabAddPerson.setOnClickListener {
-            showAddPersonDialog()
         }
 
     }
