@@ -43,6 +43,7 @@ class ShowDetailsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectedSubscription.collect {
+
                 binding.tvSubName.text = it?.name
                 binding.tvSubPrice.text = "Cena: ${it?.price}PLN"
                 binding.tvNextPayment.text = it?.paymentDate
@@ -51,8 +52,8 @@ class ShowDetailsFragment : Fragment() {
                 if (it?.image == null) {
                     binding.tvImage.text = it?.name?.first().toString()
                 }
+                binding.tvSubSpent.text = "Wydano: ${it?.renewals?.times(it.price.toInt()).toString()}PLN"
                 //TODO payment destination
-                //TODO calculate spent money
             }
             //TODO rounded image
         }

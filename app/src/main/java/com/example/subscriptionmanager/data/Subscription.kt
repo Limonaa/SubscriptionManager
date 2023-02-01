@@ -10,4 +10,5 @@ data class Subscription(
     var image: Bitmap?,
     var backgroundColor: Int?,
     var textImage: String,
+    var renewals: Int,
 ) : java.io.Serializable
