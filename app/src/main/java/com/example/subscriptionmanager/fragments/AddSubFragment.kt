@@ -58,8 +58,11 @@ class AddSubFragment : Fragment() {
             checkRequirements()
         }
 
+        //Selecting photo for subscription from gallery
         binding.ivImage.setOnClickListener {
-//            selectPhoto()
+            selectPhotoForResult()
+        }
+        binding.cvImage.setOnClickListener {
             selectPhotoForResult()
         }
 
@@ -114,7 +117,8 @@ class AddSubFragment : Fragment() {
                 binding.tiPrice.text.toString(),
                 binding.ivImage.drawable.toBitmap(),
                 null,
-                ""
+                "",
+                1
             ))
         } else {
 
@@ -126,7 +130,8 @@ class AddSubFragment : Fragment() {
                 binding.tiPrice.text.toString(),
                 null,
                 ContextCompat.getColor(requireContext(), backgroundColor),
-                binding.tiName.text?.first().toString().uppercase()
+                binding.tiName.text?.first().toString().uppercase(),
+                1
             ))
         }
         findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)

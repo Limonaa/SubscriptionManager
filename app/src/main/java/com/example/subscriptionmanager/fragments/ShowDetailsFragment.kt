@@ -17,6 +17,11 @@ import com.example.subscriptionmanager.viewmodels.MainViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import kotlin.math.abs
 
 class ShowDetailsFragment : Fragment() {
 
@@ -41,8 +46,11 @@ class ShowDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        countDaysBetween()
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectedSubscription.collect {
+
                 binding.tvSubName.text = it?.name
                 binding.tvSubPrice.text = "Cena: ${it?.price}PLN"
                 binding.tvNextPayment.text = it?.paymentDate
@@ -51,8 +59,9 @@ class ShowDetailsFragment : Fragment() {
                 if (it?.image == null) {
                     binding.tvImage.text = it?.name?.first().toString()
                 }
-                //TODO payment destination
-                //TODO calculate spent money
+                binding.tvSubSpent.text = "Wydano: ${it?.renewals?.times(it.price.toInt()).toString()}PLN"
+                binding.tvSubDuration.text = "Odnownienie za: ${countDaysBetween(it?.paymentDate.toString())} dni"
+
             }
             //TODO rounded image
         }
@@ -80,6 +89,7 @@ class ShowDetailsFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun showAddPersonDialog() {
 
         val builder = MaterialAlertDialogBuilder(requireContext())
@@ -105,5 +115,16 @@ class ShowDetailsFragment : Fragment() {
             setView(dialogLayout)
             show()
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun countDaysBetween(end: String): String {
+
+        val nowDate = LocalDate.now()
+        val shortFormatNOW = nowDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val diff = abs((sdf.parse(shortFormatNOW)?.time ?: 0) - (sdf.parse(end)?.time ?: 0))
+
+        return ((diff / 86400000) - 730517).toString()
     }
 }
