@@ -23,17 +23,17 @@
 
             <TextView
                 android:id="@+id/tv_person_name"
-                android:layout_width="220dp"
+                android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:maxLength="20"
+                android:maxLines="2"
                 android:text="Marek Łuszkiewicz"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                android:maxLines="2"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,16 +41,28 @@
                 android:id="@+id/tv_person_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:maxLength="8"
+                android:maxLines="1"
                 android:text="8 PLN"
                 android:textAlignment="center"
                 android:textSize="26sp"
                 android:textStyle="bold"
-                android:maxLines="1"
-                android:maxLength="8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_person_name"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_remove_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_baseline_delete_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
