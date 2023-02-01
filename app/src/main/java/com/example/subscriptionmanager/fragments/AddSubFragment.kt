@@ -111,7 +111,7 @@ class AddSubFragment : Fragment() {
 
         if (pickedImage != null) {
             viewModel.addSubscription(Subscription(
-                ViewCompat.generateViewId(),
+                0,
                 binding.tiName.text.toString(),
                 binding.tiDate.text.toString(),
                 binding.tiPrice.text.toString(),
@@ -124,7 +124,7 @@ class AddSubFragment : Fragment() {
 
             val backgroundColor = Constants.ICON_COLORS[abs(binding.tiName.text.toString().hashCode()) % Constants.ICON_COLORS.size]
             viewModel.addSubscription(Subscription(
-                ViewCompat.generateViewId(),
+                0,
                 binding.tiName.text.toString(),
                 binding.tiDate.text.toString(),
                 binding.tiPrice.text.toString(),

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.subscriptionmanager.R
 import com.example.subscriptionmanager.adapters.PersonAdapter
@@ -62,6 +63,10 @@ class ShowDetailsFragment : Fragment() {
                 binding.tvSubSpent.text = "Wydano: ${it?.renewals?.times(it.price.toInt()).toString()}PLN"
                 binding.tvSubDuration.text = "Odnownienie za: ${countDaysBetween(it?.paymentDate.toString())} dni"
 
+                binding.fabRemoveSub.setOnClickListener { _ ->
+                    viewModel.subscriptionList.value.remove(it)
+                    findNavController().navigate(R.id.action_showDetailsFragment_to_FirstFragment)
+                }
             }
             //TODO rounded image
         }
